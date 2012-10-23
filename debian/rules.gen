@@ -825,7 +825,7 @@ setup_sparc_none_sparc64-smp_real::
 setup_sparc_none_sparc64_real::
 	$(MAKE) -f debian/rules.real setup-flavour ABINAME='3.2.0-0.bpo.3' ABINAME_PART='-0.bpo.3' ARCH='sparc' COMPILER='gcc-4.4' FEATURESET='none' FLAVOUR='sparc64' KCONFIG='debian/config/config debian/config/sparc/config debian/config/sparc/config.sparc64' KERNEL_ARCH='sparc' LOCALVERSION='-sparc64' LOCALVERSION_HEADERS='' LOCALVERSION_IMAGE='-sparc64' MODULES='True' SOURCEVERSION='3.2.23-1~bpo60+2' TYPE='plain' UPSTREAMVERSION='3.2' VERSION='3.2'
 setup_sparc_real:
-source: source_none source_rt
+source: source_none
 source_none: source_none_real
 source_none_real::
 	$(MAKE) -f debian/rules.real source-featureset ABINAME='3.2.0-0.bpo.3' ABINAME_PART='-0.bpo.3' FEATURESET='none' SOURCEVERSION='3.2.23-1~bpo60+2' UPSTREAMVERSION='3.2' VERSION='3.2'

@@ -1,3 +1,5 @@
+grsecurity-2.9.1-3.2.23-201207242236.patch
+
 debian/version.patch
 debian/kernelvariables.patch
 debian/doc-build-parallel.patch
@@ -49,7 +51,6 @@ bugfix/all/0004-media-staging-lirc_serial-Fix-bogus-error-codes.patch
 debian/x86-memtest-WARN-if-bad-RAM-found.patch
 bugfix/all/snapshot-Implement-compat_ioctl.patch
 debian/ARM-Remove-use-of-possibly-undefined-BUILD_BUG_ON-in.patch
-bugfix/arm/ARM-topdown-mmap.patch
 bugfix/alpha/alpha-add-io-read-write-16-32-be-functions.patch
 features/arm/ARM-kirkwood-6282A1.patch
 features/all/Input-ALPS-move-protocol-information-to-Documentatio.patch
@@ -72,86 +73,6 @@ features/all/fs-hardlink-creation-restrictions-fix.patch
 features/all/fs-hardlink-creation-restriction-cleanup.patch
 bugfix/all/kbuild-do-not-check-for-ancient-modutils-tools.patch
 
-# Update all Hyper-V drivers to 3.4-rc1 (no longer staging)
-features/x86/hyperv/0001-NLS-improve-UTF8-UTF16-string-conversion-routine.patch
-features/x86/hyperv/0002-HID-Move-the-hid-hyperv-driver-out-of-staging.patch
-features/x86/hyperv/0003-Staging-hv-storvsc-Use-mempools-to-allocate-struct-s.patch
-features/x86/hyperv/0004-Staging-hv-storvsc-Cleanup-error-handling-in-the-pro.patch
-features/x86/hyperv/0005-Staging-hv-storvsc-Fixup-the-error-when-processing-S.patch
-features/x86/hyperv/0006-Staging-hv-storvsc-Fix-error-handling-storvsc_host_r.patch
-features/x86/hyperv/0007-Staging-hv-storvsc-Use-the-accessor-function-shost_p.patch
-features/x86/hyperv/0008-Staging-hv-storvsc-Use-the-unlocked-version-queuecom.patch
-features/x86/hyperv/0009-Staging-hv-storvsc-use-the-macro-KBUILD_MODNAME.patch
-features/x86/hyperv/0010-Staging-hv-storvsc-Get-rid-of-an-unnecessary-forward.patch
-features/x86/hyperv/0011-Staging-hv-storvsc-Upgrade-the-vmstor-protocol-versi.patch
-features/x86/hyperv/0012-Staging-hv-storvsc-Support-hot-add-of-scsi-disks.patch
-features/x86/hyperv/0013-Staging-hv-storvsc-Support-hot-removing-of-scsi-devi.patch
-features/x86/hyperv/0014-staging-hv-Use-kmemdup-rather-than-duplicating-its-i.patch
-features/x86/hyperv/0015-Staging-hv-vmbus-Support-building-the-vmbus-driver-a.patch
-features/x86/hyperv/0016-hv-Add-Kconfig-menu-entry.patch
-features/x86/hyperv/0017-Staging-hv-mousevsc-Remove-the-mouse-driver-from-the.patch
-features/x86/hyperv/0018-staging-hv-move-hv_netvsc-out-of-staging-area.patch
-features/x86/hyperv/0019-net-hyperv-Fix-long-lines-in-netvsc.c.patch
-features/x86/hyperv/0020-net-hyperv-Add-support-for-promiscuous-mode-setting.patch
-features/x86/hyperv/0021-Staging-hv-storvsc-Disable-clustering.patch
-features/x86/hyperv/0022-Staging-hv-storvsc-Cleanup-storvsc_device_alloc.patch
-features/x86/hyperv/0023-Staging-hv-storvsc-Fix-a-bug-in-storvsc_command_comp.patch
-features/x86/hyperv/0024-Staging-hv-storvsc-Fix-a-bug-in-copy_from_bounce_buf.patch
-features/x86/hyperv/0025-Staging-hv-storvsc-Implement-per-device-memory-pools.patch
-features/x86/hyperv/0026-Staging-hv-update-TODO-file.patch
-features/x86/hyperv/0027-HID-hv_mouse-Properly-add-the-hid-device.patch
-features/x86/hyperv/0028-Staging-hv-storvsc-Fix-a-bug-in-create_bounce_buffer.patch
-features/x86/hyperv/0029-net-hyperv-Fix-the-stop-wake-queue-mechanism.patch
-features/x86/hyperv/0030-Drivers-hv-Fix-a-memory-leak.patch
-features/x86/hyperv/0031-Drivers-hv-Make-the-vmbus-driver-unloadable.patch
-features/x86/hyperv/0032-Drivers-hv-Get-rid-of-an-unnecessary-check-in-hv.c.patch
-features/x86/hyperv/0033-net-hyperv-Remove-unnecessary-kmap_atomic-in-netvsc-.patch
-features/x86/hyperv/0034-net-hyperv-Add-NETVSP-protocol-version-negotiation.patch
-features/x86/hyperv/0035-net-hyperv-Add-support-for-jumbo-frame-up-to-64KB.patch
-features/x86/hyperv/0036-net-hyperv-fix-possible-memory-leak-in-do_set_multic.patch
-features/x86/hyperv/0037-drivers-hv-Get-rid-of-some-unnecessary-code.patch
-features/x86/hyperv/0038-net-hyperv-rx_bytes-should-account-the-ether-header-.patch
-features/x86/hyperv/0039-HID-hyperv-Properly-disconnect-the-input-device.patch
-features/x86/hyperv/0040-net-hyperv-fix-the-issue-that-large-packets-be-dropp.patch
-features/x86/hyperv/0041-net-hyperv-Use-netif_tx_disable-instead-of-netif_sto.patch
-features/x86/hyperv/0042-net-hyperv-Fix-the-page-buffer-when-an-RNDIS-message.patch
-features/x86/hyperv/0043-drivers-hv-kvp-Add-cleanup-connector-defines.patch
-features/x86/hyperv/0044-drivers-hv-kvp-Move-the-contents-of-hv_kvp.h-to-hype.patch
-features/x86/hyperv/0045-net-hyperv-Convert-camel-cased-variables-in-rndis_fi.patch
-features/x86/hyperv/0046-net-hyperv-Correct-the-assignment-in-netvsc_recv_cal.patch
-features/x86/hyperv/0047-net-hyperv-Remove-the-unnecessary-memset-in-rndis_fi.patch
-features/x86/hyperv/0048-Staging-hv-storvsc-Cleanup-some-comments.patch
-features/x86/hyperv/0049-Staging-hv-storvsc-Cleanup-storvsc_probe.patch
-features/x86/hyperv/0050-Staging-hv-storvsc-Cleanup-storvsc_queuecommand.patch
-features/x86/hyperv/0051-Staging-hv-storvsc-Introduce-defines-for-srb-status-.patch
-features/x86/hyperv/0052-Staging-hv-storvsc-Cleanup-storvsc_host_reset_handle.patch
-features/x86/hyperv/0053-Staging-hv-storvsc-Move-and-cleanup-storvsc_remove.patch
-features/x86/hyperv/0054-Staging-hv-storvsc-Add-a-comment-to-explain-life-cyc.patch
-features/x86/hyperv/0055-Staging-hv-storvsc-Get-rid-of-the-on_io_completion-i.patch
-features/x86/hyperv/0056-Staging-hv-storvsc-Rename-the-context-field-in-hv_st.patch
-features/x86/hyperv/0057-Staging-hv-storvsc-Miscellaneous-cleanup-of-storvsc-.patch
-features/x86/hyperv/0058-Staging-hv-storvsc-Cleanup-the-code-for-generating-p.patch
-features/x86/hyperv/0059-Staging-hv-storvsc-Cleanup-some-protocol-related-con.patch
-features/x86/hyperv/0060-Staging-hv-storvsc-Get-rid-of-some-unused-defines.patch
-features/x86/hyperv/0061-Staging-hv-storvsc-Consolidate-the-request-structure.patch
-features/x86/hyperv/0062-Staging-hv-storvsc-Consolidate-all-the-wire-protocol.patch
-features/x86/hyperv/0063-drivers-hv-Cleanup-the-kvp-related-state-in-hyperv.h.patch
-features/x86/hyperv/0064-tools-hv-Use-hyperv.h-to-get-the-KVP-definitions.patch
-features/x86/hyperv/0065-drivers-hv-kvp-Cleanup-the-kernel-user-protocol.patch
-features/x86/hyperv/0066-drivers-hv-Increase-the-number-of-VCPUs-supported-in.patch
-features/x86/hyperv/0067-Staging-hv-storvsc-Move-the-storage-driver-out-of-th.patch
-features/x86/hyperv/0068-net-hyperv-Use-the-built-in-macro-KBUILD_MODNAME-for.patch
-features/x86/hyperv/0069-net-hyperv-Fix-data-corruption-in-rndis_filter_recei.patch
-features/x86/hyperv/0070-net-hyperv-Add-support-for-vlan-trunking-from-guests.patch
-features/x86/hyperv/0071-Drivers-hv-Add-new-message-types-to-enhance-KVP.patch
-features/x86/hyperv/0072-net-hyperv-fix-erroneous-NETDEV_TX_BUSY-use.patch
-features/x86/hyperv/0073-Drivers-hv-Support-the-newly-introduced-KVP-messages.patch
-features/x86/hyperv/0074-Tools-hv-Fully-support-the-new-KVP-verbs-in-the-user.patch
-features/x86/hyperv/0075-Tools-hv-Support-enumeration-from-all-the-pools.patch
-features/x86/hyperv/0076-net-hyperv-Fix-the-code-handling-tx-busy.patch
-features/x86/hyperv/0077-hv-remove-the-second-argument-of-k-un-map_atomic.patch
-features/x86/hyperv/0078-libata-add-a-host-flag-to-ignore-detected-ATA-device.patch
-features/x86/hyperv/0079-ata_piix-defer-disks-to-the-Hyper-V-drivers-by-defau.patch
 
 features/x86/efi-stub/0001-x86-Add-missing-bzImage-fields-to-struct-setup_heade.patch
 features/x86/efi-stub/0002-x86-Don-t-use-magic-strings-for-EFI-loader-signature.patch
@@ -293,12 +214,6 @@ bugfix/all/hugepages-fix-use-after-free-bug-in-quota-handling.patch
 #features/all/define-netdev_features_t.patch
 #features/all/filter-Allow-to-create-sk-unattached-filters.patch
 
-# procfs hidepid from 3.4
-features/all/hidepid/0001-procfs-parse-mount-options.patch
-features/all/hidepid/0002-procfs-add-hidepid-and-gid-mount-options.patch
-features/all/hidepid/0003-proc-fix-null-pointer-deref-in-proc_pid_permission.patch
-features/all/hidepid/0004-proc-fix-mount-t-proc-o-AAA.patch
-
 bugfix/all/NFSv4-Reduce-the-footprint-of-the-idmapper.patch
 bugfix/all/NFSv4-Further-reduce-the-footprint-of-the-idmapper.patch
 
@@ -367,7 +282,9 @@ debian/driver-core-avoid-ABI-change-for-removal-of-__must_check.patch
 
 bugfix/all/scsi-Silence-unnecessary-warnings-about-ioctl-to-par.patch
 bugfix/all/udf-Improve-table-length-check-to-avoid-possible-underflow.patch
-bugfix/all/epoll-clear-the-tfile_check_list-on-eloop.patch
+
+# Already in grsec
+#bugfix/all/epoll-clear-the-tfile_check_list-on-eloop.patch
 
 # nouveau update to support Fermi (NVC0+) acceleration
 features/all/fermi-accel/drm-nouveau-ttm-always-do-buffer-moves-on-kernel-cha.patch
@@ -382,9 +299,14 @@ features/all/fermi-accel/drm-nouveau-bump-version-to-1.0.0.patch
 
 bugfix/all/net-e100-ucode-is-optional-in-some-cases.patch
 bugfix/x86/drm-i915-prefer-wide-slow-to-fast-narrow-in-DP-confi.patch
-bugfix/all/cipso-don-t-follow-a-NULL-pointer-when-setsockopt-is.patch
+
+# Already in grsec patch
+#bugfix/all/cipso-don-t-follow-a-NULL-pointer-when-setsockopt-is.patch
+
 bugfix/all/atl1c-fix-issue-of-transmit-queue-0-timed-out.patch
 bugfix/all/raid5-delayed-stripe-fix.patch
-bugfix/all/remove-easily-user-triggerable-bug-from-generic_setlease.patch
-bugfix/all/tcp-drop-syn-fin-messages.patch
-bugfix/all/fifo-do-not-restart-open-if-it-already-found-a-partner.patch
+
+# Already in grsec patch
+#bugfix/all/remove-easily-user-triggerable-bug-from-generic_setlease.patch
+#bugfix/all/tcp-drop-syn-fin-messages.patch
+#bugfix/all/fifo-do-not-restart-open-if-it-already-found-a-partner.patch

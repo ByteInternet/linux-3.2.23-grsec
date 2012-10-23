@@ -13,7 +13,6 @@ features/all/rt/0012-powerpc-Mark-IPI-interrupts-IRQF_NO_THREAD.patch
 features/all/rt/0013-powerpc-Allow-irq-threading.patch
 features/all/rt/0014-sched-Keep-period-timer-ticking-when-throttling-acti.patch
 features/all/rt/0015-sched-Do-not-throttle-due-to-PI-boosting.patch
-features/all/rt/0016-time-Remove-bogus-comments.patch
 features/all/rt/0017-x86-vdso-Remove-bogus-locking-in-update_vsyscall_tz.patch
 features/all/rt/0018-x86-vdso-Use-seqcount-instead-of-seqlock.patch
 features/all/rt/0019-ia64-vsyscall-Use-seqcount-instead-of-seqlock.patch

@@ -688,6 +688,62 @@ Depends: linux-image-3.2.0-0.bpo.3-686-pae (= ${binary:Version}), ${misc:Depends
 Description: Xen system with Linux 3.2 on modern PCs (meta-package)
  This package depends on the binary Linux image and hypervisors.
 
+Package: linux-image-3.2.0-0.bpo.3-grsec-pae-dbg
+Architecture: i386
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-grsec-pae-dbg
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [i386] | linux-initramfs-tool [i386]
+Recommends: firmware-linux-free (>= 3~), libc6-i686 [i386]
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [i386] | extlinux [i386] | lilo [i386]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for modern PCs
+ The Linux kernel 3.2 and modules for use on PCs with one or more
+ processors supporting PAE.
+ .
+ This kernel requires PAE (Physical Address Extension). This feature is
+ supported by the Intel Pentium Pro/II/III/4/4M/D, Xeon, Core and Atom; AMD
+ Geode NX, Athlon (K7), Duron, Opteron, Sempron, Turion or Phenom;
+ Transmeta Efficeon; VIA C7; and some other processors.
+ .
+ This kernel also runs on a Xen hypervisor.  It supports both privileged
+ (dom0) and unprivileged (domU) operation.
+ .
+ This package has grsec and PAX enabled.
+
+Package: linux-headers-3.2.0-0.bpo.3-grsec-pae-dbg
+Architecture: i386
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-grsec-pae-dbg
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-grsec-pae-dbg, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-grsec-pae-dbg, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-grsec-pae-dbg package.
+ .
+ This package has grsec and PAX enabled.
+
+Package: linux-image-3.2.0-0.bpo.3-grsec-pae-dbg-dbg
+Architecture: i386
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-grsec-pae-dbg, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-grsec-pae-dbg
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on PCs with one or more processors supporting
+ PAE machines.
+ .
+ This package has grsec and PAX enabled.
+
+Package: xen-linux-system-3.2.0-0.bpo.3-grsec-pae-dbg
+Architecture: i386
+Depends: linux-image-3.2.0-0.bpo.3-grsec-pae-dbg (= ${binary:Version}), ${misc:Depends}, xen-hypervisor-i386 | xen-hypervisor-amd64
+Description: Xen system with Linux 3.2 on modern PCs (meta-package)
+ This package depends on the binary Linux image and hypervisors.
+ .
+ This package has grsec and PAX enabled.
+
 Package: linux-image-3.2.0-0.bpo.3-rt-686-pae
 Architecture: i386
 Provides: linux-image, linux-modules-3.2.0-0.bpo.3-rt-686-pae
