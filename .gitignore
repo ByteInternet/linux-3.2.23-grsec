@@ -30,7 +30,6 @@ modules.builtin
 *.lzma
 *.xz
 *.lzo
-*.patch
 *.gcno
 
 #
@@ -44,11 +43,6 @@ modules.builtin
 /System.map
 /Module.markers
 /Module.symvers
-
-#
-# Debian directory (make deb-pkg)
-#
-/debian/
 
 #
 # git files that we don't want to ignore even it they are dot-files
@@ -66,10 +60,6 @@ arch/*/include/generated
 
 # stgit generated dirs
 patches-*
-
-# quilt's files
-patches
-series
 
 # cscope files
 cscope.*

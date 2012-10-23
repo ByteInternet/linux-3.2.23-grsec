@@ -1,0 +1,1424 @@
+Source: linux
+Section: kernel
+Priority: optional
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Uploaders: Bastian Blank <waldi@debian.org>, Frederik Schüler <fs@debian.org>, maximilian attems <maks@debian.org>, Ben Hutchings <ben@decadent.org.uk>
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>> 7), cpio, kmod | module-init-tools, python (>= 2.6.6-3~), lzma [armel], quilt, patchutils, gcc-4.5 [alpha], gcc-4.4 [amd64 armel armhf hppa i386 ia64 mips mipsel powerpc ppc64 s390 s390x sh4 sparc sparc64], binutils-hppa64 [hppa], gcc-4.4-hppa64 [hppa], gcc-4.6 [m68k]
+Build-Depends-Indep: bzip2, xmlto
+Vcs-Svn: svn://svn.debian.org/svn/kernel/dists/trunk/linux/
+Vcs-Browser: http://anonscm.debian.org/viewvc/kernel/dists/trunk/linux/
+
+Package: linux-source-3.2
+Architecture: all
+Section: kernel
+Provides: linux-source
+Depends: binutils, bzip2, ${misc:Depends}
+Recommends: libc6-dev | libc-dev, gcc, make
+Suggests: libncurses-dev | ncurses-dev, libqt4-dev
+Description: Linux kernel source for version 3.2 with Debian patches
+ This package provides source code for the Linux kernel version 3.2. This
+ source closely tracks official Linux kernel releases.  Debian's
+ modifications to that source consist of security fixes, bug fixes, and
+ features that have already been (or are believed to be) accepted by the
+ upstream maintainers.
+Multi-Arch: ${linux:Multi-Arch}
+
+Package: linux-doc-3.2
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Description: Linux kernel specific documentation for version 3.2
+ This package provides the various README files and HTML documentation for
+ the Linux kernel version 3.2.  Plenty of information, including the
+ descriptions of various kernel subsystems, filesystems, driver-specific
+ notes and the like.  Consult the file
+ /usr/share/doc/linux-doc-3.2/Documentation/00-INDEX for the detailed
+ description of the contents.
+Multi-Arch: ${linux:Multi-Arch}
+
+Package: linux-manual-3.2
+Architecture: all
+Section: doc
+Provides: linux-manual
+Depends: ${misc:Depends}
+Replaces: linux-manual
+Conflicts: linux-manual
+Description: Linux kernel API manual pages for version 3.2
+ This package provides the Kernel Hacker's Guide in the form of manual
+ pages, describing the kernel API functions.  They are installed into
+ section 9 of the manual.
+ .
+ As the files containing manual pages for different kernel versions are
+ installed in the same location, only one linux-manual package may be
+ installed at a time.  The linux-doc package containing the documentation
+ in other formats is free from such restriction.
+Multi-Arch: ${linux:Multi-Arch}
+
+Package: linux-support-3.2.0-0.bpo.3
+Architecture: all
+Section: devel
+Depends: ${python:Depends}, ${misc:Depends}
+Description: Support files for Linux 3.2
+ This package provides support files for the Linux kernel build, e.g.
+ scripts to handle ABI information and for generation of build system meta
+ data.
+Multi-Arch: ${linux:Multi-Arch}
+
+Package: linux-libc-dev
+Architecture: alpha amd64 armel armhf hppa i386 ia64 m68k mips mipsel powerpc ppc64 s390 s390x sh4 sparc sparc64
+Section: devel
+Provides: linux-kernel-headers
+Depends: ${misc:Depends}
+Replaces: linux-kernel-headers
+Conflicts: linux-kernel-headers
+Description: Linux support headers for userspace development
+ This package provides userspaces headers from the Linux kernel.  These
+ headers are used by the installed headers for GNU libc and other system
+ libraries.
+Multi-Arch: ${linux:Multi-Arch}
+
+Package: linux-headers-3.2.0-0.bpo.3-all
+Architecture: alpha amd64 armel armhf hppa i386 ia64 m68k mips mipsel powerpc ppc64 s390 s390x sh4 sparc sparc64
+Depends: linux-headers-3.2.0-0.bpo.3-all-${kernel:Arch} (= ${binary:Version}), ${misc:Depends}
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-alpha
+Architecture: alpha
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-alpha-generic (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-alpha-smp (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-alpha-legacy (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-headers-3.2.0-0.bpo.3-common
+Architecture: alpha amd64 armel armhf hppa i386 ia64 m68k mips mipsel powerpc ppc64 s390 s390x sh4 sparc sparc64
+Depends: ${misc:Depends}
+Description: Common header files for Linux 3.2.0-0.bpo.3
+ This package provides the architecture-specific common kernel header files
+ for Linux kernel version 3.2.0-0.bpo.3, generally used for building
+ out-of-tree kernel modules.  To obtain a complete set of headers you also
+ need to install the linux-headers-3.2.0-0.bpo.3-(flavour) package,
+ matching the flavour of the kernel you intend the build for.
+
+Package: linux-image-3.2.0-0.bpo.3-alpha-generic
+Architecture: alpha
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-alpha-generic
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [alpha] | linux-initramfs-tool [alpha]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, aboot [alpha], fdutils [alpha]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Alpha
+ The Linux kernel 3.2 and modules for use on DEC Alpha systems with
+ extended kernel start address (Wildfire, Titan, Marvel).
+
+Package: linux-headers-3.2.0-0.bpo.3-alpha-generic
+Architecture: alpha
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.5
+Description: Header files for Linux 3.2.0-0.bpo.3-alpha-generic
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-alpha-generic, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-alpha-generic, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-alpha-generic package.
+
+Package: linux-image-3.2.0-0.bpo.3-alpha-smp
+Architecture: alpha
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-alpha-smp
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [alpha] | linux-initramfs-tool [alpha]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, aboot [alpha], fdutils [alpha]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Alpha SMP
+ The Linux kernel 3.2 and modules for use on DEC Alpha SMP systems with
+ extended kernel start address (Wildfire, Titan, Marvel).
+
+Package: linux-headers-3.2.0-0.bpo.3-alpha-smp
+Architecture: alpha
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.5
+Description: Header files for Linux 3.2.0-0.bpo.3-alpha-smp
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-alpha-smp, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-alpha-smp, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-alpha-smp package.
+
+Package: linux-image-3.2.0-0.bpo.3-alpha-legacy
+Architecture: alpha
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-alpha-legacy
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [alpha] | linux-initramfs-tool [alpha]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, aboot [alpha], fdutils [alpha]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Alpha Legacy
+ The Linux kernel 3.2 and modules for use on DEC Alpha systems with legacy
+ kernel start address.
+
+Package: linux-headers-3.2.0-0.bpo.3-alpha-legacy
+Architecture: alpha
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.5
+Description: Header files for Linux 3.2.0-0.bpo.3-alpha-legacy
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-alpha-legacy, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-alpha-legacy, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-alpha-legacy package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-amd64
+Architecture: amd64
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-amd64 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-rt-amd64 (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-amd64
+Architecture: amd64 i386
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-amd64
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [amd64 i386] | linux-initramfs-tool [amd64 i386]
+Recommends: firmware-linux-free (>= 3~), libc6-i686 [i386]
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [amd64 i386] | extlinux [amd64 i386] | lilo [amd64 i386]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for 64-bit PCs
+ The Linux kernel 3.2 and modules for use on PCs with AMD64 or Intel 64
+ processors.
+ .
+ This kernel also runs on a Xen hypervisor.  It supports both privileged
+ (dom0) and unprivileged (domU) operation.
+
+Package: linux-headers-3.2.0-0.bpo.3-amd64
+Architecture: amd64 i386
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-amd64
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-amd64, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-amd64, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-amd64 package.
+
+Package: linux-image-3.2.0-0.bpo.3-amd64-dbg
+Architecture: amd64
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-amd64, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-amd64
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on PCs with AMD64 or Intel 64 processors
+ machines.
+
+Package: xen-linux-system-3.2.0-0.bpo.3-amd64
+Architecture: amd64 i386
+Depends: linux-image-3.2.0-0.bpo.3-amd64 (= ${binary:Version}), ${misc:Depends}, xen-hypervisor-amd64
+Description: Xen system with Linux 3.2 on 64-bit PCs (meta-package)
+ This package depends on the binary Linux image and hypervisors.
+
+Package: linux-headers-3.2.0-0.bpo.3-common-rt
+Architecture: amd64 i386
+Depends: ${misc:Depends}
+Description: Common header files for Linux 3.2.0-0.bpo.3-rt
+ This package provides the architecture-specific common kernel header files
+ for Linux kernel version 3.2.0-0.bpo.3-rt, generally used for building
+ out-of-tree kernel modules.  To obtain a complete set of headers you also
+ need to install the linux-headers-3.2.0-0.bpo.3-(flavour) package,
+ matching the flavour of the kernel you intend the build for.
+
+Package: linux-image-3.2.0-0.bpo.3-rt-amd64
+Architecture: amd64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-rt-amd64
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [amd64] | linux-initramfs-tool [amd64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [amd64] | extlinux [amd64] | lilo [amd64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for 64-bit PCs, PREEMPT_RT
+ The Linux kernel 3.2 and modules for use on PCs with AMD64 or Intel 64
+ processors.
+ .
+ This kernel includes the PREEMPT_RT realtime patch set.
+
+Package: linux-headers-3.2.0-0.bpo.3-rt-amd64
+Architecture: amd64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common-rt (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-rt-amd64
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-rt-amd64, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-rt-amd64, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-rt-amd64 package.
+
+Package: linux-image-3.2.0-0.bpo.3-rt-amd64-dbg
+Architecture: amd64
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-rt-amd64, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-rt-amd64
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on PCs with AMD64 or Intel 64 processors
+ machines.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-armel
+Architecture: armel
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-iop32x (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-ixp4xx (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-kirkwood (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-mv78xx0 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-orion5x (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-versatile (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-iop32x
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-iop32x
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for IOP32x
+ The Linux kernel 3.2 and modules for use on IOP32x based systems (Thecus
+ N2100, etc).
+
+Package: linux-headers-3.2.0-0.bpo.3-iop32x
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-iop32x
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-iop32x, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-iop32x, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-iop32x package.
+
+Package: linux-image-3.2.0-0.bpo.3-ixp4xx
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-ixp4xx
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for IXP4xx
+ The Linux kernel 3.2 and modules for use on IXP4xx based systems (Linksys
+ NSLU2, etc).
+
+Package: linux-headers-3.2.0-0.bpo.3-ixp4xx
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-ixp4xx
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-ixp4xx, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-ixp4xx, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-ixp4xx package.
+
+Package: linux-image-3.2.0-0.bpo.3-kirkwood
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-kirkwood
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~), uboot-mkimage [armel]
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Marvell Kirkwood
+ The Linux kernel 3.2 and modules for use on Marvell Kirkwood based systems
+ (SheevaPlug, QNAP TS-119/TS-219, etc).
+
+Package: linux-headers-3.2.0-0.bpo.3-kirkwood
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-kirkwood
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-kirkwood, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-kirkwood, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-kirkwood package.
+
+Package: linux-image-3.2.0-0.bpo.3-mv78xx0
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mv78xx0
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Marvell 78xx0
+ The Linux kernel 3.2 and modules for use on Marvell DB-78xx0-BP
+ Development Board.
+
+Package: linux-headers-3.2.0-0.bpo.3-mv78xx0
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-mv78xx0
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mv78xx0, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mv78xx0, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mv78xx0 package.
+
+Package: linux-image-3.2.0-0.bpo.3-orion5x
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-orion5x
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~), uboot-mkimage [armel]
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Marvell Orion
+ The Linux kernel 3.2 and modules for use on Marvell Orion 5181, 5182 and
+ 5281 based systems (QNAP TS-109/TS-209, etc).
+
+Package: linux-headers-3.2.0-0.bpo.3-orion5x
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-orion5x
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-orion5x, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-orion5x, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-orion5x package.
+
+Package: linux-image-3.2.0-0.bpo.3-versatile
+Architecture: armel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-versatile
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armel] | linux-initramfs-tool [armel]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armel]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Versatile
+ The Linux kernel 3.2 and modules for use on Versatile systems (PB, AB,
+ Qemu).
+
+Package: linux-headers-3.2.0-0.bpo.3-versatile
+Architecture: armel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-versatile
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-versatile, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-versatile, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-versatile package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-armhf
+Architecture: armhf
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-mx5 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-omap (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-vexpress (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-mx5
+Architecture: armhf
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mx5
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armhf] | linux-initramfs-tool [armhf]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armhf]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Freescale i.MX51
+ The Linux kernel 3.2 and modules for use on Support for Freescale i.MX51
+ family of processors.
+
+Package: linux-headers-3.2.0-0.bpo.3-mx5
+Architecture: armhf
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-mx5
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mx5, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mx5, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mx5 package.
+
+Package: linux-image-3.2.0-0.bpo.3-omap
+Architecture: armhf
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-omap
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armhf] | linux-initramfs-tool [armhf]
+Recommends: firmware-linux-free (>= 3~), uboot-mkimage [armhf]
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armhf]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for TI OMAP3+
+ The Linux kernel 3.2 and modules for use on Texas Instruments OMAP3 or
+ OMAP4 based systems.
+
+Package: linux-headers-3.2.0-0.bpo.3-omap
+Architecture: armhf
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-omap
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-omap, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-omap, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-omap package.
+
+Package: linux-image-3.2.0-0.bpo.3-vexpress
+Architecture: armhf
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-vexpress
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [armhf] | linux-initramfs-tool [armhf]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [armhf]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for ARM Ltd. Versatile Express
+ The Linux kernel 3.2 and modules for use on ARM Ltd.  Versatile Express
+ family of processors.
+
+Package: linux-headers-3.2.0-0.bpo.3-vexpress
+Architecture: armhf
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-vexpress
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-vexpress, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-vexpress, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-vexpress package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-hppa
+Architecture: hppa
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-parisc (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-parisc-smp (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-parisc64 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-parisc64-smp (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-parisc
+Architecture: hppa
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-parisc
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [hppa] | linux-initramfs-tool [hppa]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, palo [hppa]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for 32-bit PA-RISC
+ The Linux kernel 3.2 and modules for use on 32-bit PA-RISC.
+
+Package: linux-headers-3.2.0-0.bpo.3-parisc
+Architecture: hppa
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4, binutils-hppa64, gcc-4.4-hppa64
+Description: Header files for Linux 3.2.0-0.bpo.3-parisc
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-parisc, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-parisc, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-parisc package.
+
+Package: linux-image-3.2.0-0.bpo.3-parisc-smp
+Architecture: hppa
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-parisc-smp
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [hppa] | linux-initramfs-tool [hppa]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, palo [hppa]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for multiprocessor 32-bit PA-RISC
+ The Linux kernel 3.2 and modules for use on multiprocessor 32-bit PA-RISC.
+
+Package: linux-headers-3.2.0-0.bpo.3-parisc-smp
+Architecture: hppa
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4, binutils-hppa64, gcc-4.4-hppa64
+Description: Header files for Linux 3.2.0-0.bpo.3-parisc-smp
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-parisc-smp, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-parisc-smp, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-parisc-smp package.
+
+Package: linux-image-3.2.0-0.bpo.3-parisc64
+Architecture: hppa
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-parisc64
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [hppa] | linux-initramfs-tool [hppa]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, palo [hppa]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for 64-bit PA-RISC
+ The Linux kernel 3.2 and modules for use on 64-bit PA-RISC.
+
+Package: linux-headers-3.2.0-0.bpo.3-parisc64
+Architecture: hppa
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4, binutils-hppa64, gcc-4.4-hppa64
+Description: Header files for Linux 3.2.0-0.bpo.3-parisc64
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-parisc64, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-parisc64, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-parisc64 package.
+
+Package: linux-image-3.2.0-0.bpo.3-parisc64-smp
+Architecture: hppa
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-parisc64-smp
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [hppa] | linux-initramfs-tool [hppa]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, palo [hppa]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for multiprocessor 64-bit PA-RISC
+ The Linux kernel 3.2 and modules for use on multiprocessor 64-bit PA-RISC.
+
+Package: linux-headers-3.2.0-0.bpo.3-parisc64-smp
+Architecture: hppa
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4, binutils-hppa64, gcc-4.4-hppa64
+Description: Header files for Linux 3.2.0-0.bpo.3-parisc64-smp
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-parisc64-smp, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-parisc64-smp, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-parisc64-smp package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-i386
+Architecture: i386
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-486 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-686-pae (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-amd64 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-rt-686-pae (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-486
+Architecture: i386
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-486
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [i386] | linux-initramfs-tool [i386]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [i386] | extlinux [i386] | lilo [i386]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for older PCs
+ The Linux kernel 3.2 and modules for use on PCs with a single processor
+ not supporting PAE.
+ .
+ This kernel is not suitable for SMP (multi-processor, multi-core or
+ hyper-threaded) systems.
+
+Package: linux-headers-3.2.0-0.bpo.3-486
+Architecture: i386
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-486
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-486, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-486, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-486 package.
+
+Package: linux-image-3.2.0-0.bpo.3-686-pae
+Architecture: i386
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-686-pae
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [i386] | linux-initramfs-tool [i386]
+Recommends: firmware-linux-free (>= 3~), libc6-i686 [i386]
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [i386] | extlinux [i386] | lilo [i386]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for modern PCs
+ The Linux kernel 3.2 and modules for use on PCs with one or more
+ processors supporting PAE.
+ .
+ This kernel requires PAE (Physical Address Extension). This feature is
+ supported by the Intel Pentium Pro/II/III/4/4M/D, Xeon, Core and Atom; AMD
+ Geode NX, Athlon (K7), Duron, Opteron, Sempron, Turion or Phenom;
+ Transmeta Efficeon; VIA C7; and some other processors.
+ .
+ This kernel also runs on a Xen hypervisor.  It supports both privileged
+ (dom0) and unprivileged (domU) operation.
+
+Package: linux-headers-3.2.0-0.bpo.3-686-pae
+Architecture: i386
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-686-pae
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-686-pae, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-686-pae, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-686-pae package.
+
+Package: linux-image-3.2.0-0.bpo.3-686-pae-dbg
+Architecture: i386
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-686-pae, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-686-pae
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on PCs with one or more processors supporting
+ PAE machines.
+
+Package: xen-linux-system-3.2.0-0.bpo.3-686-pae
+Architecture: i386
+Depends: linux-image-3.2.0-0.bpo.3-686-pae (= ${binary:Version}), ${misc:Depends}, xen-hypervisor-i386 | xen-hypervisor-amd64
+Description: Xen system with Linux 3.2 on modern PCs (meta-package)
+ This package depends on the binary Linux image and hypervisors.
+
+Package: linux-image-3.2.0-0.bpo.3-rt-686-pae
+Architecture: i386
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-rt-686-pae
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [i386] | linux-initramfs-tool [i386]
+Recommends: firmware-linux-free (>= 3~), libc6-i686 [i386]
+Suggests: linux-doc-3.2, debian-kernel-handbook, grub-pc [i386] | extlinux [i386] | lilo [i386]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for modern PCs, PREEMPT_RT
+ The Linux kernel 3.2 and modules for use on PCs with one or more
+ processors supporting PAE.
+ .
+ This kernel requires PAE (Physical Address Extension). This feature is
+ supported by the Intel Pentium Pro/II/III/4/4M/D, Xeon, Core and Atom; AMD
+ Geode NX, Athlon (K7), Duron, Opteron, Sempron, Turion or Phenom;
+ Transmeta Efficeon; VIA C7; and some other processors.
+ .
+ This kernel includes the PREEMPT_RT realtime patch set.
+
+Package: linux-headers-3.2.0-0.bpo.3-rt-686-pae
+Architecture: i386
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common-rt (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-rt-686-pae
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-rt-686-pae, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-rt-686-pae, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-rt-686-pae package.
+
+Package: linux-image-3.2.0-0.bpo.3-rt-686-pae-dbg
+Architecture: i386
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-rt-686-pae, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-rt-686-pae
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on PCs with one or more processors supporting
+ PAE machines.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-ia64
+Architecture: ia64
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-itanium (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-mckinley (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-itanium
+Architecture: ia64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-itanium
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [ia64] | linux-initramfs-tool [ia64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [ia64], elilo [ia64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Itanium
+ The Linux kernel 3.2 and modules for use on Itanium.
+
+Package: linux-headers-3.2.0-0.bpo.3-itanium
+Architecture: ia64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-itanium
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-itanium, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-itanium, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-itanium package.
+
+Package: linux-image-3.2.0-0.bpo.3-mckinley
+Architecture: ia64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mckinley
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [ia64] | linux-initramfs-tool [ia64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [ia64], elilo [ia64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for Itanium II
+ The Linux kernel 3.2 and modules for use on Itanium II.
+
+Package: linux-headers-3.2.0-0.bpo.3-mckinley
+Architecture: ia64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-mckinley
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mckinley, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mckinley, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mckinley package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-m68k
+Architecture: m68k
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-amiga (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-atari (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-bvme6000 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-mac (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-mvme147 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-mvme16x (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-amiga
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-amiga
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Amiga
+ The Linux kernel 3.2 and modules for use on Amiga.
+
+Package: linux-headers-3.2.0-0.bpo.3-amiga
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-amiga
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-amiga, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-amiga, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-amiga package.
+
+Package: linux-image-3.2.0-0.bpo.3-atari
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-atari
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Atari
+ The Linux kernel 3.2 and modules for use on Atari.
+
+Package: linux-headers-3.2.0-0.bpo.3-atari
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-atari
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-atari, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-atari, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-atari package.
+
+Package: linux-image-3.2.0-0.bpo.3-bvme6000
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-bvme6000
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for BVM BVME4000 and BVME6000
+ The Linux kernel 3.2 and modules for use on BVM BVME4000 and BVME6000.
+
+Package: linux-headers-3.2.0-0.bpo.3-bvme6000
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-bvme6000
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-bvme6000, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-bvme6000, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-bvme6000 package.
+
+Package: linux-image-3.2.0-0.bpo.3-mac
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mac
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Macintosh
+ The Linux kernel 3.2 and modules for use on Macintosh.
+
+Package: linux-headers-3.2.0-0.bpo.3-mac
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-mac
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mac, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mac, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mac package.
+
+Package: linux-image-3.2.0-0.bpo.3-mvme147
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mvme147
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Motorola MVME147
+ The Linux kernel 3.2 and modules for use on Motorola MVME147.
+
+Package: linux-headers-3.2.0-0.bpo.3-mvme147
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-mvme147
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mvme147, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mvme147, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mvme147 package.
+
+Package: linux-image-3.2.0-0.bpo.3-mvme16x
+Architecture: m68k
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-mvme16x
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Motorola MVME162/6/7, MVME172/7
+ The Linux kernel 3.2 and modules for use on Motorola MVME162/6/7,
+ MVME172/7.
+
+Package: linux-headers-3.2.0-0.bpo.3-mvme16x
+Architecture: m68k
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.6
+Description: Header files for Linux 3.2.0-0.bpo.3-mvme16x
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-mvme16x, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-mvme16x, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-mvme16x package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-mips
+Architecture: mips
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-r4k-ip22 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-r5k-ip32 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sb1-bcm91250a (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sb1a-bcm91480b (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-4kc-malta (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-5kc-malta (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-octeon (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-r4k-ip22
+Architecture: mips
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-r4k-ip22
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for SGI IP22
+ The Linux kernel 3.2 and modules for use on SGI IP22 systems (Indy,
+ Indigo2).
+
+Package: linux-headers-3.2.0-0.bpo.3-r4k-ip22
+Architecture: mips
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-r4k-ip22
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-r4k-ip22, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-r4k-ip22, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-r4k-ip22 package.
+
+Package: linux-image-3.2.0-0.bpo.3-r5k-ip32
+Architecture: mips
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-r5k-ip32
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for SGI IP32
+ The Linux kernel 3.2 and modules for use on SGI IP32 systems (O2).
+
+Package: linux-headers-3.2.0-0.bpo.3-r5k-ip32
+Architecture: mips
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-r5k-ip32
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-r5k-ip32, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-r5k-ip32, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-r5k-ip32 package.
+
+Package: linux-image-3.2.0-0.bpo.3-sb1-bcm91250a
+Architecture: mips mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sb1-bcm91250a
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for BCM91250A
+ The Linux kernel 3.2 and modules for use on Broadcom BCM91250A systems
+ (aka SWARM).
+
+Package: linux-headers-3.2.0-0.bpo.3-sb1-bcm91250a
+Architecture: mips mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sb1-bcm91250a
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sb1-bcm91250a, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sb1-bcm91250a, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sb1-bcm91250a package.
+
+Package: linux-image-3.2.0-0.bpo.3-sb1a-bcm91480b
+Architecture: mips mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sb1a-bcm91480b
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for BCM91480B
+ The Linux kernel 3.2 and modules for use on Broadcom BCM91480B systems
+ (aka BigSur).
+
+Package: linux-headers-3.2.0-0.bpo.3-sb1a-bcm91480b
+Architecture: mips mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sb1a-bcm91480b
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sb1a-bcm91480b, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sb1a-bcm91480b, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sb1a-bcm91480b package.
+
+Package: linux-image-3.2.0-0.bpo.3-4kc-malta
+Architecture: mips mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-4kc-malta
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for MIPS Malta
+ The Linux kernel 3.2 and modules for use on MIPS Malta boards.
+
+Package: linux-headers-3.2.0-0.bpo.3-4kc-malta
+Architecture: mips mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-4kc-malta
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-4kc-malta, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-4kc-malta, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-4kc-malta package.
+
+Package: linux-image-3.2.0-0.bpo.3-5kc-malta
+Architecture: mips mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-5kc-malta
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for MIPS Malta (64-bit)
+ The Linux kernel 3.2 and modules for use on MIPS Malta boards (64-bit).
+
+Package: linux-headers-3.2.0-0.bpo.3-5kc-malta
+Architecture: mips mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-5kc-malta
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-5kc-malta, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-5kc-malta, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-5kc-malta package.
+
+Package: linux-image-3.2.0-0.bpo.3-octeon
+Architecture: mips
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-octeon
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Octeon
+ The Linux kernel 3.2 and modules for use on Cavium Networks Octeon.
+
+Package: linux-headers-3.2.0-0.bpo.3-octeon
+Architecture: mips
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-octeon
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-octeon, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-octeon, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-octeon package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-mipsel
+Architecture: mipsel
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-r5k-cobalt (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sb1-bcm91250a (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sb1a-bcm91480b (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-4kc-malta (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-5kc-malta (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-loongson-2f (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-r5k-cobalt
+Architecture: mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-r5k-cobalt
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Cobalt
+ The Linux kernel 3.2 and modules for use on Cobalt systems (Qube, RaQ,
+ Qube2, RaQ2).
+
+Package: linux-headers-3.2.0-0.bpo.3-r5k-cobalt
+Architecture: mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-r5k-cobalt
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-r5k-cobalt, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-r5k-cobalt, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-r5k-cobalt package.
+
+Package: linux-image-3.2.0-0.bpo.3-loongson-2f
+Architecture: mipsel
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-loongson-2f
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}
+Recommends: firmware-linux-free (>= 3~), libc6-loongson2f [mipsel]
+Suggests: linux-doc-3.2, debian-kernel-handbook
+Breaks: at (<< 3.1.12-1+squeeze1)
+Description: Linux 3.2 for Loongson 2F
+ The Linux kernel 3.2 and modules for use on Lemote Loongson 2F systems.
+
+Package: linux-headers-3.2.0-0.bpo.3-loongson-2f
+Architecture: mipsel
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-loongson-2f
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-loongson-2f, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-loongson-2f, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-loongson-2f package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-powerpc
+Architecture: powerpc
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-powerpc (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-powerpc-smp (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-powerpc64 (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-powerpc
+Architecture: powerpc
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-powerpc
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [powerpc] | linux-initramfs-tool [powerpc]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, mkvmlinuz [powerpc]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for uniprocessor 32-bit PowerPC
+ The Linux kernel 3.2 and modules for use on uniprocessor 32-bit PowerPC.
+
+Package: linux-headers-3.2.0-0.bpo.3-powerpc
+Architecture: powerpc
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-powerpc
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-powerpc, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-powerpc, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-powerpc package.
+
+Package: linux-image-3.2.0-0.bpo.3-powerpc-smp
+Architecture: powerpc
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-powerpc-smp
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [powerpc] | linux-initramfs-tool [powerpc]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, mkvmlinuz [powerpc]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for multiprocessor 32-bit PowerPC
+ The Linux kernel 3.2 and modules for use on multiprocessor 32-bit PowerPC.
+
+Package: linux-headers-3.2.0-0.bpo.3-powerpc-smp
+Architecture: powerpc
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-powerpc-smp
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-powerpc-smp, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-powerpc-smp, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-powerpc-smp package.
+
+Package: linux-image-3.2.0-0.bpo.3-powerpc64
+Architecture: powerpc ppc64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-powerpc64
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [powerpc ppc64] | linux-initramfs-tool [powerpc ppc64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, mkvmlinuz [powerpc ppc64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for 64-bit PowerPC
+ The Linux kernel 3.2 and modules for use on 64-bit PowerPC.
+
+Package: linux-headers-3.2.0-0.bpo.3-powerpc64
+Architecture: powerpc ppc64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-powerpc64
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-powerpc64, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-powerpc64, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-powerpc64 package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-ppc64
+Architecture: ppc64
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-powerpc64 (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-s390
+Architecture: s390
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-s390x (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-s390x
+Architecture: s390 s390x
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-s390x
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [s390 s390x] | linux-initramfs-tool [s390 s390x]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, s390-tools [s390 s390x]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for IBM zSeries
+ The Linux kernel 3.2 and modules for use on IBM zSeries.
+ .
+ This kernel has support to IPL (boot) from a VM reader or DASD device.
+
+Package: linux-headers-3.2.0-0.bpo.3-s390x
+Architecture: s390 s390x
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-s390x
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-s390x, generally used for building out-of-tree
+ kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-s390x, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-s390x package.
+
+Package: linux-image-3.2.0-0.bpo.3-s390x-dbg
+Architecture: s390 s390x
+Section: debug
+Priority: extra
+Depends: linux-image-3.2.0-0.bpo.3-s390x, ${misc:Depends}
+Description: Debugging infos for Linux 3.2.0-0.bpo.3-s390x
+ This package provides the binary debug image and pre-built debug loadable
+ modules for Linux kernel 3.2 on IBM zSeries machines.
+
+Package: linux-image-3.2.0-0.bpo.3-s390x-tape
+Architecture: s390 s390x
+Provides: linux-image
+Depends: ${misc:Depends}
+Suggests: linux-doc-3.2, s390-tools [s390 s390x]
+Description: Linux 3.2 for IBM zSeries, IPL from tape
+ The Linux kernel 3.2 for use on IBM zSeries.
+ .
+ This kernel has support to IPL (boot) from a tape.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-s390x
+Architecture: s390x
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-s390x (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-sh4
+Architecture: sh4
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-sh7751r (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sh7785lcr (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-sh7751r
+Architecture: sh4
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sh7751r
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [sh4] | linux-initramfs-tool [sh4]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [sh4]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for sh7751r
+ The Linux kernel 3.2 and modules for use on Renesas SH7751R R2D plus
+ board.
+
+Package: linux-headers-3.2.0-0.bpo.3-sh7751r
+Architecture: sh4
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sh7751r
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sh7751r, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sh7751r, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sh7751r package.
+
+Package: linux-image-3.2.0-0.bpo.3-sh7785lcr
+Architecture: sh4
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sh7785lcr
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [sh4] | linux-initramfs-tool [sh4]
+Recommends: firmware-linux-free (>= 3~), uboot-mkimage [sh4]
+Suggests: linux-doc-3.2, debian-kernel-handbook, fdutils [sh4]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for sh7785lcr
+ The Linux kernel 3.2 and modules for use on Renesas SH7785 reference
+ board.
+
+Package: linux-headers-3.2.0-0.bpo.3-sh7785lcr
+Architecture: sh4
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sh7785lcr
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sh7785lcr, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sh7785lcr, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sh7785lcr package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-sparc
+Architecture: sparc
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-sparc64 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sparc64-smp (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
+Package: linux-image-3.2.0-0.bpo.3-sparc64
+Architecture: sparc sparc64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sparc64
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [sparc sparc64] | linux-initramfs-tool [sparc sparc64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, silo [sparc sparc64], fdutils [sparc sparc64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for uniprocessor 64-bit UltraSPARC
+ The Linux kernel 3.2 and modules for use on uniprocessor 64-bit
+ UltraSPARC.
+
+Package: linux-headers-3.2.0-0.bpo.3-sparc64
+Architecture: sparc sparc64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sparc64
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sparc64, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sparc64, and can be used for building
+ modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sparc64 package.
+
+Package: linux-image-3.2.0-0.bpo.3-sparc64-smp
+Architecture: sparc sparc64
+Provides: linux-image, linux-modules-3.2.0-0.bpo.3-sparc64-smp
+Pre-Depends: debconf | debconf-2.0
+Depends: kmod | module-init-tools, linux-base (>= 3~), ${misc:Depends}, initramfs-tools (>= 0.99~) [sparc sparc64] | linux-initramfs-tool [sparc sparc64]
+Recommends: firmware-linux-free (>= 3~)
+Suggests: linux-doc-3.2, debian-kernel-handbook, silo [sparc sparc64], fdutils [sparc sparc64]
+Breaks: at (<< 3.1.12-1+squeeze1), initramfs-tools (<< 0.99~)
+Description: Linux 3.2 for multiprocessor 64-bit UltraSPARC
+ The Linux kernel 3.2 and modules for use on multiprocessor 64-bit
+ UltraSPARC.
+
+Package: linux-headers-3.2.0-0.bpo.3-sparc64-smp
+Architecture: sparc sparc64
+Provides: linux-headers
+Depends: linux-headers-3.2.0-0.bpo.3-common (= ${binary:Version}), linux-kbuild-3.2, ${misc:Depends}, gcc-4.4
+Description: Header files for Linux 3.2.0-0.bpo.3-sparc64-smp
+ This package provides the architecture-specific kernel header files for
+ Linux kernel 3.2.0-0.bpo.3-sparc64-smp, generally used for building
+ out-of-tree kernel modules.  These files are going to be installed into
+ /usr/src/linux-headers-3.2.0-0.bpo.3-sparc64-smp, and can be used for
+ building modules that load into the kernel provided by the
+ linux-image-3.2.0-0.bpo.3-sparc64-smp package.
+
+Package: linux-headers-3.2.0-0.bpo.3-all-sparc64
+Architecture: sparc64
+Depends: ${misc:Depends}, linux-headers-3.2.0-0.bpo.3-sparc64 (= ${binary:Version}), linux-headers-3.2.0-0.bpo.3-sparc64-smp (= ${binary:Version})
+Description: All header files for Linux 3.2 (meta-package)
+ This package depends against all architecture-specific kernel header files
+ for Linux kernel version 3.2, generally used for building out-of-tree
+ kernel modules.
+
